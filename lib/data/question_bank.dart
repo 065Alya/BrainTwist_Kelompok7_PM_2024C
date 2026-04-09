@@ -7,7 +7,7 @@ List<Question> questionBank = [
   Question("Apa yang ada di ujung langit?",
       ["Awan", "Matahari", "Huruf 't'", "Burung"], 2, "mudah"),
 
-  Question("Jika 1kg batu dan 1kg kapas dijatuhkan ke kaki?",
+  Question("Jika 1kg batu dan 1kg kapas dijatuhkan ke kaki, mana yang lebih sakit?",
       ["Batu", "Kapas", "Sama saja", "Kaki kita"], 3, "mudah"),
 
   Question("Siapa yang memotong rambut tiap hari tapi tidak botak?",
@@ -31,38 +31,38 @@ List<Question> questionBank = [
   Question("Ayam apa yang tidak bisa berkokok?",
       ["Ayam betina", "Ayam goreng", "Ayam kecil", "Ayam tua"], 1, "mudah"),
 
-  Question("Apa yang semakin tua semakin muda?",
+  Question("Apa yang semakin tua terlihat semakin muda?",
       ["Kakek", "Pohon", "Lilin", "Batu"], 2, "mudah"),
 
   // ================== SEDANG ==================
-  Question("Aku selalu ada di atas presiden tapi tidak punya jabatan?",
+  Question("Aku selalu ada di atas presiden tapi tidak punya jabatan, siapakah aku?",
       ["Mahkota", "Rambut", "Peci", "Topi"], 2, "sedang"),
 
-  Question("Pintu apa didorong 7 orang tidak terbuka?",
+  Question("Pintu apa didorong 7 orang tetapi tetap tidak terbuka?",
       ["Besi", "Kayu", "Terkunci", "Geser"], 3, "sedang"),
 
-  Question("Saat dibalik akan berkurang 3?",
+  Question("Angka apa yang saat dibalik, nilainya akan berkurang 3?",
       ["8", "7", "9", "6"], 2, "sedang"),
 
-  Question("3 anak perempuan masing punya 1 adik laki-laki?",
+  Question("3 anak perempuan masing punya 1 adik laki-laki, berapa banyak mereka memiliki adik laki-laki?",
       ["3", "2", "1", "4"], 2, "sedang"),
 
   Question("Apa yang punya 12 kaki dan bisa terbang?",
       ["12 ayam", "6 burung", "3 kucing", "2 elang"], 1, "sedang"),
 
-  Question("Apa yang punya tangan tapi tidak bisa tepuk?",
+  Question("Apa yang punya tangan tapi tidak bisa tepuk tangan?",
       ["Orang", "Patung", "Jam", "Boneka"], 1, "sedang"),
 
-  Question("Berapa kali bisa mengurangi 5 dari 25?",
+  Question("Berapa kali bisa mengurangi angka 5 dari 25?",
       ["5", "Tak terbatas", "1", "2"], 2, "sedang"),
 
-  Question("Dokter punya saudara laki-laki, tapi tidak sebaliknya?",
+  Question("Seorang dokter punya saudara laki-laki, tapi saudara laki-laki itu tidak punya saudara. Bagaimana bisa?",
       ["Kembar", "Dokter perempuan", "Bohong", "Beda ibu"], 1, "sedang"),
 
   Question("Apa yang selalu ada di awal, tengah, akhir bulan?",
       ["Gajian", "Tagihan", "Huruf 'b'", "Tanggal"], 2, "sedang"),
 
-  Question("Ayah punya 4 anak, siapa anak keempat?",
+  Question("Ayah punya 4 anak, yaitu Senin, Selasa, Rabu, siapa anak keempat?",
       ["Kamis", "Jumat", "Anak keempat", "Tidak tahu"], 2, "sedang"),
 
   // ================== SULIT ==================
@@ -84,13 +84,13 @@ List<Question> questionBank = [
   Question("Aku bicara tanpa mulut, hidup saat angin?",
       ["Hantu", "Gema", "Angin", "Bayangan"], 1, "sulit"),
 
-  Question("17 domba, semua kecuali 9 mati?",
+  Question("17 domba, semua kecuali 9 mati, berapa sisa dombanya?",
       ["8", "17", "9", "0"], 2, "sulit"),
 
-  Question("Menyalip orang ke-2, posisi?",
-      ["1", "2", "3", "Terakhir"], 1, "sulit"),
+  Question("Jika kamu berada di perlombaan dan menyalip orang di urutan kedua, kamu ada diposisi berapa?",
+      ["1", "2", "3", "Terakhir"], 2, "sulit"),
 
-  Question("3 apel, ambil 2, punya berapa?",
+  Question("Ada 3 apel dan kamu mengambil 2. Berapa apel yang kamu punya?",
       ["1", "3", "2", "0"], 2, "sulit"),
 
   Question("Lebih besar dari Tuhan & mematikan jika dimakan?",
@@ -108,5 +108,23 @@ List<Question> getRandomQuestions(String level) {
 
   filtered.shuffle(random);
 
-  return filtered.take(10).toList(); // ambil 10 soal acak
+  // ACAK OPSI JAWABAN
+  List<Question> randomized = filtered.map((q) {
+    List<String> shuffledOptions = List.from(q.options);
+    String correctAnswer = q.options[q.answerIndex];
+
+    shuffledOptions.shuffle(random);
+
+    int newIndex = shuffledOptions.indexOf(correctAnswer);
+
+    return Question(
+      q.question,
+      shuffledOptions,
+      newIndex,
+      q.level,
+      imagePath: q.imagePath,
+    );
+  }).toList();
+
+  return randomized.take(10).toList();
 }

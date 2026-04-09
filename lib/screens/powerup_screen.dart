@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../utils/sound_manager.dart';
 import 'quiz_page.dart';
 
 class PowerUpScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class PowerUpScreen extends StatefulWidget {
   });
 
   @override
-  _PowerUpScreenState createState() => _PowerUpScreenState();
+  State<PowerUpScreen> createState() => _PowerUpScreenState();
 }
 
 class _PowerUpScreenState extends State<PowerUpScreen> {
@@ -22,6 +23,8 @@ class _PowerUpScreenState extends State<PowerUpScreen> {
   @override
   void initState() {
     super.initState();
+
+    SoundManager.play("power_up.mp3");
 
     Future.delayed(Duration(seconds: 2), () {
       Navigator.pushReplacement(
@@ -40,8 +43,15 @@ class _PowerUpScreenState extends State<PowerUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("🧠 POWER UP BRAIN ⚡", style: TextStyle(fontSize: 26)),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.purple],
+          ),
+        ),
+        child: Center(
+          child: Image.asset('assets/images/power_up.png', width: 700),
+        ),
       ),
     );
   }
