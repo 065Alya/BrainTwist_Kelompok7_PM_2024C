@@ -70,7 +70,7 @@ List<Question> questionBank = [
       ["Capek", "Lulus", "Ilmu tidak salah", "Pintar"], 2, "sulit"),
 
   Question("Cara melipatgandakan uang?",
-      ["Tabung", "Investasi", "Fotokopi", "Lipat"], 3, "sulit"),
+      ["Tabung", "Investasi", "Fotokopi", "Lipat"], 2, "sulit"),
 
   Question("Lemari apa bisa masuk kantong?",
       ["Kecil", "Plastik", "Lemaribuan", "Mini"], 2, "sulit"),
@@ -88,7 +88,7 @@ List<Question> questionBank = [
       ["8", "17", "9", "0"], 2, "sulit"),
 
   Question("Jika kamu berada di perlombaan dan menyalip orang di urutan kedua, kamu ada diposisi berapa?",
-      ["1", "2", "3", "Terakhir"], 2, "sulit"),
+      ["1", "2", "3", "Terakhir"], 1, "sulit"),
 
   Question("Ada 3 apel dan kamu mengambil 2. Berapa apel yang kamu punya?",
       ["1", "3", "2", "0"], 2, "sulit"),
