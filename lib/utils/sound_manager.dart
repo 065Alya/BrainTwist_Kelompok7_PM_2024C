@@ -2,21 +2,8 @@ import 'package:audioplayers/audioplayers.dart';
 
 class SoundManager {
   static final bg = AudioPlayer();
-  static final sfx = AudioPlayer();
 
-  static Future<void> init() async {
-    await bg.setAudioContext(
-      AudioContext(
-        android: AudioContextAndroid(
-          isSpeakerphoneOn: true,
-          stayAwake: true,
-          contentType: AndroidContentType.music,
-          usageType: AndroidUsageType.media,
-        ),
-      ),
-    );
-  }
-
+  // 🎵 BACKGROUND MUSIC
   static Future<void> playBg() async {
     await bg.setReleaseMode(ReleaseMode.loop);
     await bg.setVolume(1.0);
@@ -27,8 +14,10 @@ class SoundManager {
     await bg.stop();
   }
 
+  // 🔊 SFX TANPA DELAY
   static Future<void> play(String file) async {
-    await sfx.setVolume(1.0);
-    await sfx.play(AssetSource('sounds/$file'));
+    final player = AudioPlayer(); // 🔥 buat baru tiap klik
+    await player.setVolume(1.0);
+    await player.play(AssetSource('sounds/$file'));
   }
 }
